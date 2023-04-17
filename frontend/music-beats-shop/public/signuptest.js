@@ -1,88 +1,62 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
-function SignUp() {
+function Signup() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleUsernameChange(event) {
+  const handleUsernameChange = (event) => {
     setUsername(event.target.value);
-  }
+  };
 
-  function handleEmailChange(event) {
+  const handleEmailChange = (event) => {
     setEmail(event.target.value);
-  }
+  };
 
-  function handlePasswordChange(event) {
+  const handlePasswordChange = (event) => {
     setPassword(event.target.value);
-  }
+  };
 
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    // do something with the form data
-  }
+    console.log('Username:', username);
+    console.log('Email:', email);
+    console.log('Password:', password);
+  };
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-sm-6 col-sm-offset-3">
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <h2 className="text-center">Create Account</h2>
+    <Container>
+      <Row className="justify-content-center">
+        <Col md={6}>
+          <h2 className="text-center mb-4">Create Account</h2>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="username">
+              <Form.Label>Username:</Form.Label>
+              <Form.Control type="text" placeholder="Enter username" value={username} onChange={handleUsernameChange} />
+            </Form.Group>
+            <Form.Group controlId="email">
+              <Form.Label>Email:</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" value={email} onChange={handleEmailChange} />
+            </Form.Group>
+            <Form.Group controlId="password">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control type="password" placeholder="Enter password" value={password} onChange={handlePasswordChange} minLength={8} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)" />
+              <Form.Text className="text-muted">
+                Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.
+              </Form.Text>
+            </Form.Group>
+            <div className="text-center">
+              <Button variant="primary" type="submit">Signup</Button>
             </div>
-            <div className="panel-body">
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="username">Username:</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    placeholder="Enter username"
-                    value={username}
-                    onChange={handleUsernameChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email:</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    placeholder="Enter email"
-                    value={email}
-                    onChange={handleEmailChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Password:</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder="Enter password"
-                    value={password}
-                    onChange={handlePasswordChange}
-                    minLength={8}
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)"
-                  />
-                  <small className="form-text text-muted">
-                    Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.
-                  </small>
-                </div>
-                <div className="form-group text-center">
-                  <button type="submit" className="btn btn-primary">Signup</button>
-                </div>
-                <div className="form-group text-center">
-                  <a href="login.html">Already have an Account?</a>
-                </div>
-              </form>
+            <div className="text-center mt-3">
+              Already have an account? <a href="login.html">Login here.</a>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
-export default SignUp;
+export default Signup;
