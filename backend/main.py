@@ -5,6 +5,7 @@ from dbaccount import acc
 api = Flask(__name__)
 
 user = None
+id = None
 cart = None
 
 #MongoDB
@@ -42,22 +43,79 @@ def signup():
 def login():
 
     global user
+    global cart
+    global id
 
-    user = next((user for user in users if user['id'] == user_id), None)
-    if user is None:
-        return f'User Not Found! Please Signup'
-    return f'Welcome {user}'
+    #Local
+    username = request.args.get('username', None)
+    password = request.args.get('password', None)
+
+    x = mycol.find_one(
+        {
+        'username': username, 
+        'password': password
+        }
+    )
+
+    if x is not None:
+        
+        user = username
+        cart = x['cart']
+        id = x['_id']
+        
+        if cart is not None:
+            return f"Welcome {user} {id}. Your cart is {cart['name']} & {cart['price']}"
+        else:
+            return f"Welcome {user} {id}. Your cart is {cart}"
+    else:
+        return f'Not found {user}. Create account.'
 
 
+#New Signup   POST
+@api.route('/logout', methods=['GET', 'POST'])
+def logout():
+
+    global user
+    global cart
+
+    user = None
+    cart = None
+
+    print(user, cart)
+
+    return f'Log out successful'
 
 #Add & View Cart
 #add-to-cart   POST
 @api.route('/addtocart', methods=['GET','POST'])
-
 def add_to_cart():
+    '''
     item = request.form
     cart.append({'name': item.get('name'), 'price': float(item.get('price', 0))})
-    return f"Item '{item.get('name')}' added to cart", 200
+    '''
+    global cart
+    global id
+    global user
+
+    prod_name = request.args.get('name')
+    prod_price = float(request.args.get('price'))
+
+    cart_dict = dict({'name': prod_name, 'price': prod_price})
+
+
+    mycol.update_one({'username': user}, {'$set':{'cart': cart_dict}}) #Filter , to update
+    
+    x = mycol.find_one(
+        {
+        'username': user, 
+        '_id': id
+        }
+    )
+
+    print(x)
+    
+    
+    return f"Item '{prod_name}' added to cart"
 
 
 
