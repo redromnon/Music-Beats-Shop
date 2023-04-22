@@ -27,11 +27,10 @@ def signup():
     #Local
     user = request.args.get('username', None)
     password = request.args.get('password', None)
-    cart = request.args.get('cart', None)
     # TODO: hash the password before storing it in the database
     
     #Insert record
-    x = mycol.insert_one({'username': user, 'password': password, 'cart': cart})
+    x = mycol.insert_one({'username': user, 'password': password, 'cart': None})
     print(x.inserted_id)
     
     return f'Welcome {user}. Your password is {password}, Cart is {cart}'
