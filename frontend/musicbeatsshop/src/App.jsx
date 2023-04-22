@@ -8,6 +8,9 @@ import './App.css'
 import SearchBar from '../components/SearchBar'
 import MusicCard from '../components/MusicCard'
 import Cart from '../components/Cart'
+import SignUp from '../components/SignUp';
+import SignIn from '../components/SignIn';
+
 
 
 
@@ -23,7 +26,7 @@ function App() {
       {/* <SearchBar musicData = {musicData}/> */}
       <BrowserRouter>     
         <Routes>
-              <Route path="/" element={<Home/>} />
+              <Route path="/" element={<SignIn/>} />
               <Route path="/cart" element={<Cart/>} />
         </Routes>
       </BrowserRouter>
