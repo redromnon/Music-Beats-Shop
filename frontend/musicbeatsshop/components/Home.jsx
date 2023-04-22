@@ -2,6 +2,9 @@ import React from "react";
 import SearchBar from "./SearchBar";
 import Navbar from "./Navbar";
 import MusicCard from "./MusicCard";
+import track1image from "../src/assets/track1.png"
+import track2image from "../src/assets/track2.png"
+import track3image from "../src/assets/track4.png"
 
 const musicData = [
     {
@@ -9,7 +12,7 @@ const musicData = [
       name:"track1",
       artist:"artist1",
       genre:"pop",
-      coverImage:"https://via.placeholder.com/150",
+      coverImage:track1image,
       price:"499",
     },
     {
@@ -17,7 +20,7 @@ const musicData = [
       name:"track2",
       artist:"artist3 ",
       genre:"rock",
-      coverImage:"https://via.placeholder.com/150",
+      coverImage:track2image,
       price:"999",
     },
     {
@@ -25,7 +28,7 @@ const musicData = [
       name:"track3",
       artist:"artist3",
       genre:"classical",
-      coverImage:"https://via.placeholder.com/150",
+      coverImage:track3image,
       price:"2999",
     },
     //more entries
