@@ -1,26 +1,23 @@
 import React from "react";
+import './SignIn.css';
+import { Outlet,Link } from 'react-router-dom';
 
-export default function SignUp (){
+export default function SignUp(){
     return(
     <>
         <div className="container">
-		<h2>Create Account</h2>
+		<h2>Sign Up</h2>
 		
 			<div className="form-group">
-				<label className="username">Username:</label>
-				<input type="text"  id="username" placeholder="Enter username"/>
+				<input type="text" id="username" placeholder="Enter Username"/>
 			</div>
 			<div className="form-group">
-                <label className="password">Password:</label>
-                <input type="password" id="password" placeholder="Enter password"/>
-                
+                <input type="password" id="password" placeholder="Enter Password"/> 
             </div>   
             <div className="button-align">           
-			    <button type="submit" className="btn btn-primary">Signup</button>
+			    <button type="submit" className="btn btn-primary">Sign Up</button>
             </div>
-            <div className="button-align">
-                <a href="login.html">Already have an Account?</a>
-            </div>
+            <Link style={{color:'grey'}}>Already have an account?</Link>
         
 	    </div>
     </>
