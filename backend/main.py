@@ -77,9 +77,11 @@ def logout():
 
     global user
     global cart
+    global id
 
     user = None
     cart = None
+    id = None
 
     print(user, cart)
 
@@ -100,28 +102,37 @@ def add_to_cart():
     prod_name = request.args.get('name')
     prod_price = float(request.args.get('price'))
 
-    cart_dict = dict({'name': prod_name, 'price': prod_price})
+    if user:
 
+        cart = dict({'name': prod_name, 'price': prod_price})
 
-    mycol.update_one({'username': user}, {'$set':{'cart': cart_dict}}) #Filter , to update
-    
-    x = mycol.find_one(
-        {
-        'username': user, 
-        '_id': id
-        }
-    )
+        mycol.update_one({'username': user}, {'$set':{'cart': cart}}) #Filter , to update
+        
+        x = mycol.find_one(
+            {
+            'username': user, 
+            '_id': id
+            }
+        )
 
-    print(x)
-    
-    
-    return f"Item '{prod_name}' added to cart"
+        print(x)
+        
+        
+        return f"Item '{prod_name}' added to cart"
+    else:
+
+        return f"Please login before adding to cart"
 
 
 
 #view cart   GET
 @api.route('/cart', methods=['GET','POST'])
 def view_cart():
+
+    global cart
+    global user
+
+    '''
     cart_items = []
     total_price = 0
 
@@ -129,8 +140,11 @@ def view_cart():
         item_price = float(item['price']) * item['quantity']
         cart_items.append({'name': item['name'], 'quantity': item['quantity'], 'price': item_price})
         total_price += item_price
-
-    return Response(f'Cart Contents: {cart_items}\nTotal Cart Value: {total_price}', status=200)
+    '''
+    if user:
+        return f"Cart Contents: {cart['name']}\nTotal Cart Value: {cart['price']}"
+    else:
+        return f"Please login before viewing cart"
 
 
 
@@ -141,11 +155,11 @@ def view_cart():
 @api.route('/checkout', methods=['GET','POST'])
 def checkout():
     # Retrieve items from cart
-    items = request.args.getlist('item')
+    #items = request.args.getlist('item')
     # Calculate total price
-    total_price = sum([float(request.args.get(f'price_{item}')) for item in items])
+    #total_price = sum([float(request.args.get(f'price_{item}')) for item in items])
     # Redirect to payment page
-    return f"Redirecting to payment gateway with total price of {total_price:.2f} for items: {', '.join(items)}", 302
+    return f"Redirecting to payment gateway with total price of {cart['price']} for items: {cart['name']}"
 
 
 if __name__ == "__main__":
