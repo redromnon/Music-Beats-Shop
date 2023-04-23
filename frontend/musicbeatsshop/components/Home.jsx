@@ -34,11 +34,16 @@ const musicData = [
     //more entries
   ];
   
-export default function Home(){
+export default function Home({onPurchase}){
+
+    
     return(
         <>
             <Navbar/>
-            <SearchBar musicData = {musicData}/>
+            <SearchBar musicData = {musicData} onPurchase = {onPurchase}/>
+            {/* {musicData.map((music)=>(
+              <MusicCard key={music.id} music={music} onPurchase={()=> onPurchase(music)}/>
+            ))} */}
             {/* <MusicCard/> */}
         </>
     )

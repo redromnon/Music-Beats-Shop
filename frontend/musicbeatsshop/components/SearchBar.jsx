@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MusicCard from "./MusicCard";
 import './SearchBar.css';
 
-const SearchBar = ({musicData})=>{
+const SearchBar = ({musicData,onPurchase})=>{
     const [searchQuery,setSearchQuery] = useState('');
     const [searchResults, setSearchResults]= useState(musicData);
 
@@ -40,7 +40,7 @@ const handleInputChange = (event)=>{
             <button onClick={handleSearch} className="search-btn">Search</button> 
              <div className="music-cards-container">
                 {searchResults.map((music)=>(
-                    <MusicCard key={music.id} music={music} />
+                    <MusicCard key={music.id} music={music} onPurchase={()=>onPurchase(music)}/>
                     
                 ))}
             </div> 

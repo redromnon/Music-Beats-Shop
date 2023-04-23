@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, NavLink, Route, Routes} from 'react-router-dom';
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
@@ -12,13 +12,13 @@ import SignUp from '../components/SignUp';
 import SignIn from '../components/SignIn';
 
 
-
-
-
-
-
 function App() {
   
+  const [cartItem, setCartItem] = useState(null);
+  
+  const handlePurchase = (music) =>{
+    setCartItem(music);
+  }
 
   return (
     <div className="App">
@@ -27,7 +27,8 @@ function App() {
       <BrowserRouter>     
         <Routes>
               <Route path="/" element={<SignIn/>} />
-              <Route path="/cart" element={<Cart/>} />
+              <Route path="/cart" element={<Cart cartItem={cartItem}/>} />
+              <Route path="/home" element={<Home onPurchase={handlePurchase}X/>} />
         </Routes>
       </BrowserRouter>
 
