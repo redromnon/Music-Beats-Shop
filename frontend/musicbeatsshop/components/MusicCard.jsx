@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './SearchBar.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './Cart';
 import axios from 'axios'
 
@@ -56,10 +56,10 @@ export default function MusicCard({music, onPurchase}){
                  <h3 style={{backgroundColor:"transparent"}}>{music.name}</h3>
                  <h4 style={{backgroundColor:"transparent"}}>{music.artist}</h4>                 <p style={{backgroundColor:"transparent"}}>Rs{music.price}</p>
                  <button className="prelisten-btn">Prelisten</button>
-                 <Link to = '/cart'>
+                 {/*<Link to = '/cart'>*/}
                  {/* <button onClick={()=> onPurchase(music)}className="purchase-btn">Purchase</button> */}
                  <button onClick={handlePurchase} className="purchase-btn">Purchase</button>
-                 </Link>
+                 {/*</Link>*/}
 
              {/* </div> */}
          </div>

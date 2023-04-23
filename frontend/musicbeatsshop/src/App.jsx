@@ -14,7 +14,7 @@ import SignIn from '../components/SignIn';
 
 function App() {
   
-  const [cartItem, setCartItem] = useState(null);
+  const [cartItem, setCartItem] = useState([]);
   
   const handlePurchase = (music) =>{
     setCartItem(music);

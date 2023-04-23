@@ -1,9 +1,33 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import './Cart.css'
+import axios from "axios";
 
 
 export default function Cart ({cartItem}){
+
+    const [music_name, setMusicName] = useState("")
+    const [music_price, setMusicPrice] = useState("")
+
+    useEffect(() => {
+        axios.get(`http://127.0.0.1:5000/cart`)
+          .then((response) => {
+            console.log(response)
+
+            const data = response.data
+            setMusicName(data.name)
+            setMusicPrice(data.price)
+
+          }).catch((error) => {
+            if (error.response) {
+              console.log(error.response)
+              console.log(error.response.status)
+              console.log(error.response.headers)
+              }
+          })
+    })
+
+
     if(!cartItem){
         return <p> No item in cart.</p>;
     }
@@ -15,7 +39,6 @@ export default function Cart ({cartItem}){
             <thead>
                 <tr>
                     <th>cover</th>
-                    <th>Product</th>
                     <th>Price</th>
                     
                 </tr>
@@ -23,21 +46,19 @@ export default function Cart ({cartItem}){
 
                 <tbody>
                     <tr>
-                        <td><img src= {cartItem.coverImage}className="cart-product-image" /></td>
-                        <td>{cartItem.name}</td>
-                        <td>{cartItem.price}</td>
+                        <td>{music_name}</td>
+                        <td>{music_price}</td>
                     </tr>
                 </tbody>
             </table>
             <div className="cart-total">
-                <h3>Total: {cartItem.price}</h3>
+                <h3>Total: {music_name}</h3>
             </div>
             
             <div>
-                <img src={cartItem.image} alt={cartItem.title} />
-                <p>{cartItem.title} - {cartItem.artist} - \${cartItem.price}</p>
+                <p>{music_name} - \${music_price}</p>
             </div>
-            <p>Total Price : Rs{cartItem.price}</p>
+            <p>Total Price : Rs{music_price}</p>
             {/* <Link to= '/payments'>
                 <button>Go to payments</button>
             </Link> */}

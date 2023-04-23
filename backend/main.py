@@ -161,7 +161,8 @@ def view_cart():
         total_price += item_price
     '''
     if user:
-        return f"Cart Contents: {cart['name']}\nTotal Cart Value: {cart['price']}"
+        #return f"Cart Contents: {cart['name']}\nTotal Cart Value: {cart['price']}"
+        return {'name' : cart['name'], 'price': cart['price']}
     else:
         return f"Please login before viewing cart"
 
