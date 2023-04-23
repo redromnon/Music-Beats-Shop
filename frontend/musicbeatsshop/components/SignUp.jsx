@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './SignIn.css';
 import { Outlet,Link } from 'react-router-dom';
 import axios from "axios";
-
+import SignIn from "./SignIn";
 export default function SignUp(){
 
     const [username, setUsername] = useState('')
@@ -51,7 +51,7 @@ export default function SignUp(){
             <div className="button-align">           
 			    <button onClick={HandleSignUp} type="submit" className="btn btn-primary">Sign Up</button>
             </div>
-            <Link style={{color:'grey'}}>Already have an account?</Link>
+            <Link to='/' style={{color:'grey'}}>Already have an account?</Link>
         
 	    </div>
     </>

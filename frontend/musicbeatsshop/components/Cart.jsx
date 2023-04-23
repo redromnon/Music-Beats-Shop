@@ -14,6 +14,7 @@ export default function Cart ({cartItem}){
             <table className="cart-table">
             <thead>
                 <tr>
+                    <th>cover</th>
                     <th>Product</th>
                     <th>Price</th>
                     
@@ -22,6 +23,7 @@ export default function Cart ({cartItem}){
 
                 <tbody>
                     <tr>
+                        <td><img src= {cartItem.coverImage}className="cart-product-image" /></td>
                         <td>{cartItem.name}</td>
                         <td>{cartItem.price}</td>
                     </tr>

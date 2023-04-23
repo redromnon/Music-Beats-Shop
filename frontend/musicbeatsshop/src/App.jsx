@@ -27,6 +27,7 @@ function App() {
       <BrowserRouter>     
         <Routes>
               <Route path="/" element={<SignIn/>} />
+              <Route path="/signup" element={<SignUp/>} />
               <Route path="/cart" element={<Cart cartItem={cartItem}/>} />
               <Route path="/home" element={<Home onPurchase={handlePurchase}X/>} />
         </Routes>

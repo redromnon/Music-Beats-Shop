@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import './SignIn.css';
 import { Outlet,Link } from 'react-router-dom';
 import axios from "axios";
+import SignUp from "./SignUp";
 
 export default function SignIn(){
 
@@ -59,7 +60,7 @@ export default function SignIn(){
                 Sign In
                 </button>
             </div>
-            <Link style={{color:'grey'}}>Don't have an Account?</Link>
+            <Link to='/signup' style={{color:'grey'}}>Don't have an Account?</Link>
         
 	    </div>
     </>
