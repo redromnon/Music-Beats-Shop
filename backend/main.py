@@ -113,8 +113,13 @@ def add_to_cart():
     global id
     global user
 
-    prod_name = request.args.get('name')
-    prod_price = float(request.args.get('price'))
+    #prod_name = request.args.get('name')
+    #prod_price = float(request.args.get('price'))
+
+    data = request.json
+
+    prod_name = data.get('name')
+    prod_price = float(data.get('price'))
 
     if user:
 
