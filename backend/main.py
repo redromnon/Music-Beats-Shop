@@ -1,8 +1,11 @@
 from flask import Flask, request
 from pymongo import MongoClient
+from flask_cors import CORS
 from dbaccount import acc
 
+
 api = Flask(__name__)
+CORS(api)
 
 user = None
 id = None
@@ -25,12 +28,17 @@ def signup():
     #global user
 
     #Local
-    user = request.args.get('username', None)
-    password = request.args.get('password', None)
+    #user = request.args.get('username', None)
+    #password = request.args.get('password', None)
+    data = request.json
+    
+    user = data.get('username')
+    password = data.get('password')
+
     # TODO: hash the password before storing it in the database
     
     #Insert record
-    x = mycol.insert_one({'username': user, 'password': password, 'cart': None})
+    x = mycol.insert_one({'username': user, 'password': password, 'cart': cart})
     print(x.inserted_id)
     
     return f'Welcome {user}. Your password is {password}, Cart is {cart}'
@@ -46,8 +54,15 @@ def login():
     global id
 
     #Local
-    username = request.args.get('username', None)
-    password = request.args.get('password', None)
+    #username = request.form.get('username')
+    #password = request.form.get('password')
+    data = request.json
+
+    username = data.get('username')
+    password = data.get('password')
+
+    print(username)
+    print(password)
 
     x = mycol.find_one(
         {
