@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 import './SignIn.css';
-import { Outlet,Link } from 'react-router-dom';
+import { Outlet,Link,useNavigate } from 'react-router-dom';
 import axios from "axios";
 import SignUp from "./SignUp";
 
 export default function SignIn(){
+
+    const navigate = useNavigate()
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -19,6 +21,7 @@ export default function SignIn(){
           .then((response) => {
             console.log(response)
             alert("Successfully logged in!")
+            navigate('/home');
           }).catch((error) => {
             if (error.response) {
               console.log(error.response)
